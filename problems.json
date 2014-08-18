@@ -1,0 +1,78 @@
+{
+	"feedback": [
+		[[1],"Correct!"],
+		[[0],"Incorrect"],
+		[[1,1,1],"Correct Streak!"],
+		[[0,0,0],"Oh no!! So bad!!"]
+	],
+	"method":"norepeatrandom",
+	"grade":"mix",
+	"problems": [
+		{
+			"id": "Euler's Identity",
+			"difficulty": -2,
+			"weight": 1,
+			"type": "text",
+			"content": "What is the value of \\(e^{i\\pi}+1\\)?",
+			"solution": "0"
+		},
+		{
+			"id": "Binary Conversion",
+			"difficulty": 0,
+			"weight": 1,
+			"type": "text",
+			"content": "What's 1023 in base 2?",
+			"solution": "1111111111"
+		},
+		{
+			"id": "Sample Checkbox",
+			"difficulty": 1,
+			"weight": 1,
+			"type": "checkbox",
+			"content": {
+				"question":"Which of the following is/are true?",
+				"options": {
+					"0": " \\(1+1=2\\)",
+					"1": " All squares are rectangles",
+					"2": " A torus and a 2-sphere are not isomorphic",
+					"3": " If \\(a \\overset{\\mathrm{def}}{=\\mathrel{\\mkern-2.5mu}=} b \\text{ and } b \\overset{\\mathrm{def}}{=\\mathrel{\\mkern-2.5mu}=} c, \\text{ then } a \\overset{\\mathrm{def}}{=\\mathrel{\\mkern-2.5mu}=} c\\)"
+				}
+			},
+			"solution": ["0","1","2"]
+		},
+		{
+			"id": "Sample Multiple Choice",
+			"difficulty": 2,
+			"weight": 1,
+			"type": "multiplechoice",
+			"content": {
+				"question": "Which of the following data structures is more ideal for sorting?",
+				"options": {
+					"0": " Array",
+					"1": " Linked List",
+					"2": " Binary Tree",
+					"3": " Hash Table"
+				}
+			},
+			"solution": "3"
+		},
+		{
+			"id": "Sample Dropdown",
+			"difficulty": -3,
+			"weight": 1,
+			"type": "dropdown",
+			"content": {
+				"question": "What kind of problem is this?",
+				"options": {
+					"0": "",
+					"1": "Text Input",
+					"2": "Checkbox",
+					"3": "Multiple Choice",
+					"4": "Dropdown",
+					"5": "Drag and Drop"
+				}
+			},
+			"solution": "4"
+		}
+	]
+}
