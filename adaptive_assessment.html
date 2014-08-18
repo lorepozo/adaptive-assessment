@@ -113,7 +113,7 @@ grade: (for grading)
 problems: 
 	TODO: write documentation here. See problems.json in the meatime.
 feedback:
-	TODO: implement
+	TODO: documentation
 */
 (function(){
 	
@@ -224,7 +224,9 @@ feedback:
 		var p = problemFromId(exp[exp.length-1]);
 		switch(p.type){
 			case 'text':
-				return problemFromId(exp[exp.length-1]).solution==document.getElementById('q').value;
+				return problemFromId(exp[exp.length-1]).solution.Function
+					?Function("inp",problemFromId(exp[exp.length-1]).solution.Function)(document.getElementById('q').value)
+					:problemFromId(exp[exp.length-1]).solution==document.getElementById('q').value;
 			case 'checkbox':
 				for(var r=[],i=0;i<length(p.content.options);i++){
 					if(document.getElementById(String(i)).checked){r[r.length]=String(i);}

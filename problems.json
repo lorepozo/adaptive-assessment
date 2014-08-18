@@ -10,19 +10,19 @@
 	"problems": [
 		{
 			"id": "Euler's Identity",
-			"difficulty": -2,
+			"difficulty": 1,
 			"weight": 1,
 			"type": "text",
 			"content": "What is the value of \\(e^{i\\pi}+1\\)?",
-			"solution": "0"
+			"solution": {"Function":"return Number(inp)==0"}
 		},
 		{
-			"id": "Binary Conversion",
-			"difficulty": 0,
+			"id": "Euler's Number",
+			"difficulty": -2,
 			"weight": 1,
 			"type": "text",
-			"content": "What's 1023 in base 2?",
-			"solution": "1111111111"
+			"content": "What symbol is used for Euler's number?",
+			"solution": "e"
 		},
 		{
 			"id": "Sample Checkbox",
