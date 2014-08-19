@@ -17,7 +17,7 @@
 			"type": "text",
 			"content": "What is the value of \\(e^{i\\pi}+1\\)?",
 			"solution": {"Function":"return Number(inp)==0"},
-			"explanation": "\\[\\sin x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n}{(2n+1)!}x^{2n+1}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\\cdots\\]\\[\\cos x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n}{(2n)!}x^{2n}=1-\\frac{x^2}{2!}+\\frac{x^4}{4!}-\\cdots\\]\\[e^z=\\sum_{n=0}^{\\infty}\\frac{z^n}{n!}=1+z+\\frac{z^2}{2!}+\\frac{z^3}{3!}+\\cdots\\]Substitute z=ix in the last series:\\[e^{ix}=\\sum_{n=0}^{\\infty}\\frac{(ix)^n}{n!}=1+ix+\\frac{(ix)^2}{2!}+\\frac{(ix)^3}{3!}+\\cdots\\]\\[=1+ix-\\frac{x^2}{2!}-i\\frac{x^3}{3!}+\\frac{x^4}{4!}+i\\frac{x^5}{5!}-\\cdots\\]\\[=1-\\frac{x^2}{2!}+\\frac{x^4}{4!}+\\cdots +i\\left(x-\\frac{x^3}{3!}+\\frac{x^5}{5!}-\\cdots\\right)\\]\\[=\\cos x+i\\sin x\\]"
+			"explanation": "\\[\\sin x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n}{(2n+1)!}x^{2n+1}=x-\\frac{x^3}{3!}+\\frac{x^5}{5!}-\\cdots\\]\\[\\cos x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n}{(2n)!}x^{2n}=1-\\frac{x^2}{2!}+\\frac{x^4}{4!}-\\cdots\\]\\[e^z=\\sum_{n=0}^{\\infty}\\frac{z^n}{n!}=1+z+\\frac{z^2}{2!}+\\frac{z^3}{3!}+\\cdots\\]Substitute z=ix in the last series:\\[e^{ix}=\\sum_{n=0}^{\\infty}\\frac{(ix)^n}{n!}=1+ix+\\frac{(ix)^2}{2!}+\\frac{(ix)^3}{3!}+\\cdots\\]\\[=1+ix-\\frac{x^2}{2!}-i\\frac{x^3}{3!}+\\frac{x^4}{4!}+i\\frac{x^5}{5!}-\\cdots\\]\\[=1-\\frac{x^2}{2!}+\\frac{x^4}{4!}+\\cdots +i\\left(x-\\frac{x^3}{3!}+\\frac{x^5}{5!}-\\cdots\\right)\\]\\[=\\cos x+i\\sin x\\]"
 		},
 		{
 			"id": "Euler's Number",
