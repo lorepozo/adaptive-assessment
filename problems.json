@@ -14,7 +14,8 @@
 			"weight": 1,
 			"type": "text",
 			"content": "What is the value of \\(e^{i\\pi}+1\\)?",
-			"solution": {"Function":"return Number(inp)==0"}
+			"solution": {"Function":"return Number(inp)==0"},
+			"explanation": "\\[\\sin x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n}{(2n+1)!}x^{2n+1}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\\cdots\\]\\[\\cos x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n}{(2n)!}x^{2n}=1-\\frac{x^2}{2!}+\\frac{x^4}{4!}-\\cdots\\]\\[e^z=\\sum_{n=0}^{\\infty}\\frac{z^n}{n!}=1+z+\\frac{z^2}{2!}+\\frac{z^3}{3!}+\\cdots\\]Substitute z=ix in the last series:\\[e^{ix}=\\sum_{n=0}^{\\infty}\\frac{(ix)^n}{n!}=1+ix+\\frac{(ix)^2}{2!}+\\frac{(ix)^3}{3!}+\\cdots\\]\\[=1+ix-\\frac{x^2}{2!}-i\\frac{x^3}{3!}+\\frac{x^4}{4!}+i\\frac{x^5}{5!}-\\cdots\\]\\[=1-\\frac{x^2}{2!}+\\frac{x^4}{4!}+\\cdots +i\\left(x-\\frac{x^3}{3!}+\\frac{x^5}{5!}-\\cdots\\right)\\]\\[=\\cos x+i\\sin x\\]"
 		},
 		{
 			"id": "Euler's Number",
@@ -32,13 +33,13 @@
 			"content": {
 				"question":"Which of the following is/are true?",
 				"options": {
-					"0": " \\(1+1=2\\)",
-					"1": " All squares are rectangles",
-					"2": " A torus and a 2-sphere are not isomorphic",
-					"3": " If \\(a \\overset{\\mathrm{def}}{=\\mathrel{\\mkern-2.5mu}=} b \\text{ and } b \\overset{\\mathrm{def}}{=\\mathrel{\\mkern-2.5mu}=} c, \\text{ then } a \\overset{\\mathrm{def}}{=\\mathrel{\\mkern-2.5mu}=} c\\)"
+					"Addition": " \\(1+1=2\\)",
+					"Geometry": " All squares are rectangles",
+					"Manifolds": " A torus and a 2-sphere are not isomorphic",
+					"Intrasitive": " If \\(a \\overset{\\mathrm{def}}{=\\mathrel{\\mkern-2.5mu}=} b \\text{ and } b \\overset{\\mathrm{def}}{=\\mathrel{\\mkern-2.5mu}=} c, \\text{ then } a \\overset{\\mathrm{def}}{=\\mathrel{\\mkern-2.5mu}=} c\\)"
 				}
 			},
-			"solution": ["0","1","2"]
+			"solution": ["Addition","Geometry","Manifolds"]
 		},
 		{
 			"id": "Sample Multiple Choice",
@@ -48,9 +49,9 @@
 			"content": {
 				"question": "Which of the following data structures is more ideal for sorting?",
 				"options": {
-					"0": " Array",
+					"Array": " Array",
 					"1": " Linked List",
-					"2": " Binary Tree",
+					"Binary Tree": " Binary Tree",
 					"3": " Hash Table"
 				}
 			},
@@ -64,15 +65,15 @@
 			"content": {
 				"question": "What kind of problem is this?",
 				"options": {
-					"0": "",
-					"1": "Text Input",
-					"2": "Checkbox",
-					"3": "Multiple Choice",
-					"4": "Dropdown",
-					"5": "Drag and Drop"
+					"Blank": "",
+					"T": "Text Input",
+					"C": "Checkbox",
+					"M": "Multiple Choice",
+					"D": "Dropdown",
+					"Drag": "Drag and Drop"
 				}
 			},
-			"solution": "4"
+			"solution": "D"
 		}
 	]
 }
