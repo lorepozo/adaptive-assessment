@@ -1,0 +1,416 @@
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+var update = setInterval(function(){
+	if(window.MathJax){
+		MathJax.Hub.Config({
+			showProcessingMessages: false,
+			messageStyle: "none"
+		});
+		clearInterval(update);
+	 }
+}, 1);
+</script>
+<script>
+/*! JSChannel | (c) 2010 Lloyd Hilaiel; Mozilla | Mozilla Public License */var Channel=function(){"use strict";function n(e,n,r,i){function s(t){for(var n=0;n<t.length;n++)if(t[n].win===e)return true;return false}var o=false;if(n==="*"){for(var u in t){if(!t.hasOwnProperty(u))continue;if(u==="*")continue;if(typeof t[u][r]==="object"){o=s(t[u][r]);if(o)break}}}else{if(t["*"]&&t["*"][r]){o=s(t["*"][r])}if(!o&&t[n]&&t[n][r]){o=s(t[n][r])}}if(o)throw"A channel is already bound to the same window which overlaps with origin '"+n+"' and has scope '"+r+"'";if(typeof t[n]!="object")t[n]={};if(typeof t[n][r]!="object")t[n][r]=[];t[n][r].push({win:e,handler:i})}function r(e,n,r){var i=t[n][r];for(var s=0;s<i.length;s++){if(i[s].win===e){i.splice(s,1)}}if(t[n][r].length===0){delete t[n][r]}}function i(e){if(Array.isArray)return Array.isArray(e);else{return e.constructor.toString().indexOf("Array")!=-1}}var e=Math.floor(Math.random()*1000001);var t={};var s={};var o=function(e){try{var n=JSON.parse(e.data);if(typeof n!=="object"||n===null)throw"malformed"}catch(e){return}var r=e.source;var i=e.origin;var o,u,a;if(typeof n.method==="string"){var f=n.method.split("::");if(f.length==2){o=f[0];a=f[1]}else{a=n.method}}if(typeof n.id!=="undefined")u=n.id;if(typeof a==="string"){var l=false;if(t[i]&&t[i][o]){for(var c=0;c<t[i][o].length;c++){if(t[i][o][c].win===r){t[i][o][c].handler(i,a,n);l=true;break}}}if(!l&&t["*"]&&t["*"][o]){for(var c=0;c<t["*"][o].length;c++){if(t["*"][o][c].win===r){t["*"][o][c].handler(i,a,n);break}}}}else if(typeof u!="undefined"){if(s[u])s[u](i,a,n)}};if(window.addEventListener)window.addEventListener("message",o,false);else if(window.attachEvent)window.attachEvent("onmessage",o);return{build:function(t){var o=function(e){if(t.debugOutput&&window.console&&window.console.log){try{if(typeof e!=="string")e=JSON.stringify(e)}catch(n){}console.log("["+f+"] "+e)}};if(!window.postMessage)throw"jschannel cannot run this browser, no postMessage";if(!window.JSON||!window.JSON.stringify||!window.JSON.parse){throw"jschannel cannot run this browser, no JSON parsing/serialization"}if(typeof t!="object")throw"Channel build invoked without a proper object argument";if(!t.window||!t.window.postMessage)throw"Channel.build() called without a valid window argument";if(window===t.window)throw"target window is same as present window -- not allowed";var u=false;if(typeof t.origin==="string"){var a;if(t.origin==="*")u=true;else if(null!==(a=t.origin.match(/^https?:\/\/(?:[-a-zA-Z0-9_\.])+(?::\d+)?/))){t.origin=a[0].toLowerCase();u=true}}if(!u)throw"Channel.build() called with an invalid origin";if(typeof t.scope!=="undefined"){if(typeof t.scope!=="string")throw"scope, when specified, must be a string";if(t.scope.split("::").length>1)throw"scope may not contain double colons: '::'"}var f=function(){var e="";var t="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";for(var n=0;n<5;n++)e+=t.charAt(Math.floor(Math.random()*t.length));return e}();var l={};var c={};var h={};var p=false;var d=[];var v=function(e,t,n){var r=false;var i=false;return{origin:t,invoke:function(t,r){if(!h[e])throw"attempting to invoke a callback of a nonexistent transaction: "+e;var i=false;for(var s=0;s<n.length;s++)if(t===n[s]){i=true;break}if(!i)throw"request supports no such callback '"+t+"'";b({id:e,callback:t,params:r})},error:function(t,n){i=true;if(!h[e])throw"error called for nonexistent message: "+e;delete h[e];b({id:e,error:t,message:n})},complete:function(t){i=true;if(!h[e])throw"complete called for nonexistent message: "+e;delete h[e];b({id:e,result:t})},delayReturn:function(e){if(typeof e==="boolean"){r=e===true}return r},completed:function(){return i}}};var m=function(e,t,n){return window.setTimeout(function(){if(c[e]){var r="timeout ("+t+"ms) exceeded on method '"+n+"'";(1,c[e].error)("timeout_error",r);delete c[e];delete s[e]}},t)};var g=function(e,n,r){if(typeof t.gotMessageObserver==="function"){try{t.gotMessageObserver(e,r)}catch(u){o("gotMessageObserver() raised an exception: "+u.toString())}}if(r.id&&n){if(l[n]){var a=v(r.id,e,r.callbacks?r.callbacks:[]);h[r.id]={};try{if(r.callbacks&&i(r.callbacks)&&r.callbacks.length>0){for(var f=0;f<r.callbacks.length;f++){var p=r.callbacks[f];var d=r.params;var m=p.split("/");for(var g=0;g<m.length-1;g++){var y=m[g];if(typeof d[y]!=="object")d[y]={};d=d[y]}d[m[m.length-1]]=function(){var e=p;return function(t){return a.invoke(e,t)}}()}}var b=l[n](a,r.params);if(!a.delayReturn()&&!a.completed())a.complete(b)}catch(u){var w="runtime_error";var E=null;if(typeof u==="string"){E=u}else if(typeof u==="object"){if(u&&i(u)&&u.length==2){w=u[0];E=u[1]}else if(typeof u.error==="string"){w=u.error;if(!u.message)E="";else if(typeof u.message==="string")E=u.message;else u=u.message}}if(E===null){try{E=JSON.stringify(u);if(typeof E=="undefined")E=u.toString()}catch(S){E=u.toString()}}a.error(w,E)}}}else if(r.id&&r.callback){if(!c[r.id]||!c[r.id].callbacks||!c[r.id].callbacks[r.callback]){o("ignoring invalid callback, id:"+r.id+" ("+r.callback+")")}else{c[r.id].callbacks[r.callback](r.params)}}else if(r.id){if(!c[r.id]){o("ignoring invalid response: "+r.id)}else{if(r.error){(1,c[r.id].error)(r.error,r.message)}else{if(r.result!==undefined)(1,c[r.id].success)(r.result);else(1,c[r.id].success)()}delete c[r.id];delete s[r.id]}}else if(n){if(l[n]){l[n]({origin:e},r.params)}}};n(t.window,t.origin,typeof t.scope==="string"?t.scope:"",g);var y=function(e){if(typeof t.scope==="string"&&t.scope.length)e=[t.scope,e].join("::");return e};var b=function(e,n){if(!e)throw"postMessage called with null message";var r=p?"post  ":"queue ";o(r+" message: "+JSON.stringify(e));if(!n&&!p){d.push(e)}else{if(typeof t.postMessageObserver==="function"){try{t.postMessageObserver(t.origin,e)}catch(i){o("postMessageObserver() raised an exception: "+i.toString())}}t.window.postMessage(JSON.stringify(e),t.origin)}};var w=function(e,n){o("ready msg received");if(p)throw"received ready message while in ready state.  help!";if(n==="ping"){f+="-R"}else{f+="-L"}E.unbind("__ready");p=true;o("ready msg accepted.");if(n==="ping"){E.notify({method:"__ready",params:"pong"})}while(d.length){b(d.pop())}if(typeof t.onReady==="function")t.onReady(E)};var E={unbind:function(e){if(l[e]){if(!delete l[e])throw"can't delete method: "+e;return true}return false},bind:function(e,t){if(!e||typeof e!=="string")throw"'method' argument to bind must be string";if(!t||typeof t!=="function")throw"callback missing from bind params";if(l[e])throw"method '"+e+"' is already bound!";l[e]=t;return this},call:function(t){if(!t)throw"missing arguments to call function";if(!t.method||typeof t.method!=="string")throw"'method' argument to call must be string";if(!t.success||typeof t.success!=="function")throw"'success' callback missing from call";var n={};var r=[];var i=[];var o=function(e,t){if(i.indexOf(t)>=0){throw"params cannot be a recursive data structure"}i.push(t);if(typeof t==="object"){for(var s in t){if(!t.hasOwnProperty(s))continue;var u=e+(e.length?"/":"")+s;if(typeof t[s]==="function"){n[u]=t[s];r.push(u);delete t[s]}else if(typeof t[s]==="object"){o(u,t[s])}}}};o("",t.params);var u={id:e,method:y(t.method),params:t.params};if(r.length)u.callbacks=r;if(t.timeout)m(e,t.timeout,y(t.method));c[e]={callbacks:n,error:t.error,success:t.success};s[e]=g;e++;b(u)},notify:function(e){if(!e)throw"missing arguments to notify function";if(!e.method||typeof e.method!=="string")throw"'method' argument to notify must be string";b({method:y(e.method),params:e.params})},destroy:function(){r(t.window,t.origin,typeof t.scope==="string"?t.scope:"");if(window.removeEventListener)window.removeEventListener("message",g,false);else if(window.detachEvent)window.detachEvent("onmessage",g);p=false;l={};h={};c={};t.origin=null;d=[];o("channel destroyed");f=""}};E.bind("__ready",w);setTimeout(function(){b({method:y("__ready"),params:"ping"},true)},0);return E}}}()
+var Modal=function(){var c={},e={},b=document.createElement("div"),a=document.createElement("div"),f=document.createElement("div"),d=document.createElement("div"),g=document.createElement("div");c.open=function(l){e.width=l.width||"auto";e.height=l.height||"auto";d.innerHTML=l.content||"";a.style.width=e.width;a.style.height=e.height;b.style.display="block";a.style.display="block";MathJax.Hub.Queue(["Typeset",MathJax.Hub,d]);document.onkeypress=function(a){27===a.keyCode&&!0!==e.lock&&c.close()};g.onclick=c.close;b.onclick=c.close;window.addEventListener?window.addEventListener("resize",void 0,!1):window.attachEvent&&window.attachEvent("onresize",void 0);f.onmousedown=function(){return  !1};c.center({})};c.close=function(){d.innerHTML="",b.style.display="none",a.style.display="none",a.style.display="none",f.style.cursor="default";g.setAttribute("style","");window.removeEventListener?window.removeEventListener("resize",void 0,!1):window.detachEvent&&window.detachEvent("onresize",void 0)};c.center=function(c){var f=Math.max(a.clientWidth,a.offsetWidth),g=Math.max(a.clientHeight,a.offsetHeight),d=0,m=0,h=0,k=0;"number"===typeof window.innerWidth?(d=window.innerWidth,m=window.innerHeight):document.documentElement&&document.documentElement.clientWidth&&(d=document.documentElement.clientWidth,m=document.documentElement.clientHeight);"number"===typeof window.pageYOffset?(k=window.pageYOffset,h=window.pageXOffset):document.body.scrollLeft?(k=document.body.scrollTop,h=document.body.scrollLeft):document.documentElement&&document.documentElement.scrollLeft&&(k=document.documentElement.scrollTop,h=document.documentElement.scrollLeft);a.style.top=(k+m/2-g/2<0?0:k+m/2-g/2)+"px",a.style.left=(h+d/2-f/2<0?0:h+d/2-f/2)+"px",b.style.height="100%",b.style.width="100%";};b.setAttribute("id","modal-overlay");a.setAttribute("id","modal-container");d.setAttribute("id","modal-content");g.setAttribute("id","modal-close");f.appendChild(g);a.appendChild(f);a.appendChild(d);b.style.display="none";a.style.display="none";document.body.appendChild(b);document.body.appendChild(a);return c};
+Element.prototype.css=function(p){for(var k in p){this.style[k]=p[k]}};
+</script>
+<style>
+body {overflow:auto;}
+p { font-size: 1em; color: #444; font-family: 'helvetica neue', helvetica, arial, sans-serif; font-weight: 200; }
+button {
+	background-color: rgb(66, 139, 202);
+	border: 1px solid rgb(53, 126, 189);
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	box-sizing: border-box;
+	color: white;
+	cursor: pointer;
+	display: inline-block;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	line-height: 23px;
+	padding: 10px 16px;
+}
+button:hover {
+	background-color: rgb(48, 113, 169);
+	border-color: rgb(40, 94, 142);
+}
+button:active {
+	-webkit-box-shadow: rgba(0, 0, 0, 0.121569) 0px 3px 5px 0px inset;
+	box-shadow: rgba(0, 0, 0, 0.121569) 0px 3px 5px 0px inset;
+}
+input, select{
+	-webkit-box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px 0px inset;
+	background-color: rgb(242, 242, 242);
+	background-image: linear-gradient(rgb(242, 242, 242), rgb(255, 255, 255));
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border-top: 1px solid rgb(178, 178, 178);
+	border-right: 1px solid rgb(178, 178, 178);
+	border-bottom: 1px solid rgb(178, 178, 178);
+	border-left: 1px solid rgb(178, 178, 178);
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px 0px inset;
+	box-sizing: border-box;
+	color: rgb(76, 76, 76);
+	display: inline-block;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13px;
+	padding: 6px 8px 8px;
+	text-rendering: optimizelegibility;
+}
+input:focus {
+	background-color: rgb(255, 252, 241);
+	background-image: linear-gradient(rgb(255, 252, 241), rgb(255, 254, 253));
+}
+label {
+	color: rgb(76, 76, 76);
+	display: block;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 23.68000030517578px;
+	margin-bottom: 6px;
+	text-rendering: optimizelegibility;
+}
+fieldset {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left:2px solid rgb(221,221,221);
+	box-sizing: border-box;
+	color: rgb(76, 76, 76);
+	display: block;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 23.68000030517578px;
+	margin: 0 0 20px;
+	padding: 0 0 0 20px;
+	text-rendering: optimizelegibility;
+}
+#modal-overlay {
+	background: #fff;
+	filter: alpha(opacity=60);
+	height: 100%;
+	left: 0;
+	-moz-opacity: 0.6;
+	-webkit-opacity: 0.6;
+	-ms-filter: alpha(opacity=60);
+	opacity: 0.6;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 998;
+}
+#modal-container {
+	background: #fff;
+	border: 1px solid #ababab;
+	box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+	height: auto;
+	padding: 10px;
+	position: absolute;
+	z-index: 998;
+}
+#modal-header {
+	height: 20px;
+	overflow: hidden;
+	clear: both;
+}
+#modal-close {
+	float: right;
+	cursor: pointer;
+	display: block;
+	opacity: 0.6;
+	-moz-opacity: 0.6;
+	-webkit-opacity: 0.6;
+	filter: alpha(opacity=60);
+	-ms-filter: alpha(opacity=60);
+	width: 0;
+	height: 0;
+	border-top: 20px solid red;
+	border-left: 20px solid transparent;
+}
+#modal-close:hover {
+	opacity: 1.0;
+	-moz-opacity: 1.0;
+	-webkit-opacity: 1.0;
+	filter: alpha(opacity=100);
+	-ms-filter: alpha(opacity=100);
+}
+#modal-content {
+	display: block;
+	padding: 0 20px 10px 20px;
+	z-index: 999;
+}
+</style>
+<script>
+(function(){
+	
+	var exp=[],g=[],switcher=1,json={},problems=[],explain=false,
+	footer='<div id="grade" style="display:none;margin-bottom:20px;"></div><button id="btn" onclick="switchClick();">Submit</button><button id="viewsoln" style="display:none;">View Solution</button>';
+	
+	function problemFromId(i) {
+		for(var j=0;j<problems.length;j++){
+			if(problems[j]['id']==i){return problems[j];}
+		}return null;
+	}
+	function display(problem) {
+		if(!problem){document.body.innerHTML = '<p>There are no more problems for you, please press the check button to grade your progress.</p>';return null;}
+		switch(problem.type) {
+			case "text":
+				document.body.innerHTML = '<p>'+problem.content+'<br><input type=text id=q name=q/></p>'+footer;
+				break;
+			case "checkbox":
+				var inside = '',k=Object.keys(problem.content.options);
+				for(var i=0;i<k.length;i++){
+					inside+='<label><input type=checkbox name="'+k[i]+'" id="'+k[i]+'" value="'+k[i]+'"/>'+problem.content.options[k[i]]+'</label>';
+				}
+				document.body.innerHTML = '<p>'+problem.content.question+'<br><fieldset>'+inside+'</fieldset></p>'+footer;
+				break;
+			case "multiplechoice":
+				var inside = '',k=Object.keys(problem.content.options);
+				for(var i=0;i<k.length;i++){
+					inside+='<label><input type=radio name=q id="'+k[i]+'" value="'+k[i]+'"/>'+problem.content.options[k[i]]+'</label>';
+				}
+				document.body.innerHTML = '<p>'+problem.content.question+'<br><fieldset>'+inside+'</fieldset></p>'+footer;
+				break;
+			case "dropdown":
+				var inside = '',k=Object.keys(problem.content.options);
+				for(var i=0;i<k.length;i++){
+					inside+='<option value="'+k[i]+'">'+problem.content.options[k[i]]+'</option>';
+				}
+				document.body.innerHTML = '<p>'+problem.content.question+'<br><select name=q id=q>'+inside+'</select></p>'+footer;
+				break;
+		}
+		if(json.feedback && json.feedback.length){
+			document.body.innerHTML = feedbackMatch() + document.body.innerHTML;
+		}
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+		if(finalGrade()&&problem!==null){document.body.innerHTML='<p style="color:green;">You have completed the problem!<br>You may continue for more practice, or hit check to receive the grade.</p>'+document.body.innerHTML}
+		return problem;
+	}
+	function newProblem() {
+		if(json.method&&json.method.Function){
+			return exp[exp.length]=display(Function(json.method.Function)()).id;
+		}
+		if(!json.method||json.method==''||json.method=='norepeatrandom'){
+			var todo=[],i,j,p,dont_use;
+			for(j in problems){
+				p = problems[j], dont_use=false;
+				for(i=0;i<=exp.length;i++){
+					if(exp[i]==p.id){dont_use=true}
+				}
+				if(!dont_use){
+					todo[todo.length]=p;
+				}
+			}
+			if(todo.length>0){
+				return exp[exp.length]=display(todo[Math.floor(Math.random()*todo.length)]).id;
+			}
+			return display(null);
+		} else 
+		if(json.method=='order'){
+			var todo=[],i=1,j,p;
+			for(j in problems){
+				p = problems[j], dont_use=false;
+				for(;i<=problems.length;i++){
+					if(exp[exp.length-i]==p.id){dont_use=true;}
+				}
+				if(!dont_use){
+					return exp[exp.length]=display(p).id;
+				}
+			}
+			return display(null);
+		} else 
+		if(json.method=='repeat'){
+			var todo=[],i=0,j,p;
+			for(j in problems){
+				p = problems[j], dont_use=false;
+				for(i=0;i<g.length;i++){
+					if(g[i] && exp[i]==p.id){dont_use=true;}
+				}
+				if(!dont_use){
+					todo[todo.length]=p;
+				}
+			}
+			if(todo.length>0){
+				return exp[exp.length]=display(todo[Math.floor(Math.random()*todo.length)]).id;
+			}
+			return display(null);
+		} else 
+		if(json.method=='bisection'){
+			// TODO
+		} else 
+		if(json.method=='random'){
+			return exp[exp.length]=display(problems[Math.floor(Math.random()*problems.length)]).id;
+		}
+	}
+	function grade() {
+		var p = problemFromId(exp[exp.length-1]);
+		switch(p.type){
+			case 'text':
+				return problemFromId(exp[exp.length-1]).solution.Function
+					?Function("inp",problemFromId(exp[exp.length-1]).solution.Function)(document.getElementById('q').value)
+					:problemFromId(exp[exp.length-1]).solution==document.getElementById('q').value;
+			case 'checkbox':
+				for(var r=[],i=0,k=Object.keys(p.content.options);i<k.length;i++){
+					if(document.getElementById(k[i]).checked){r[r.length]=k[i];}
+				}
+				return JSON.stringify(problemFromId(exp[exp.length-1]).solution)==JSON.stringify(r);
+			case 'multiplechoice':
+				for(var i=0,k=Object.keys(p.content.options);i<k.length;i++){
+					if(document.getElementById(k[i]).checked){return problemFromId(exp[exp.length-1]).solution==k[i];}
+				}
+			case 'dropdown':
+				return problemFromId(exp[exp.length-1]).solution==document.getElementById('q').value;
+		}
+	}
+	function submit() {
+		g[g.length]=grade();
+		if(g[g.length-1]){
+			document.getElementById('grade').css({
+				'display':'block',
+				'background-image':'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAUCAYAAAB4d5a9AAAAp0lEQVR42rXUwQmDQBCF4c1RCFiANQjpIK2klUBAjzYkCIKQGtJBIDVs3m1hfxCHGQ//db7DwEtpvJxe9MFebaoDEgh8VVYf1UUjtwKoCooHCLWxABtUOh1QQFo1qeYA8DsEqBrYVFZzgZyAIlBaAAFALwCqAtBaICtA5K3yDnS3AUQAGSLA+PhIgIgdehpXmJAXIMKugAA4EEIE/AihFUAIQujhWes/y8ehvHZpw4IAAAAASUVORK5CYII=)',
+				'width':'25px',
+				'height':'20px'
+			});
+		}else{
+			document.getElementById('grade').css({
+				'display':'block',
+				'background-image':'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAyElEQVR42pXSsQkCQRBA0atBOLADU8EC7MNIsABh+xAEQRBM7cDUGgRBsAOjS03PWWQYnUH+XPA5dhlecLPNuWm+m0kTO2MLd/45TKVOeibRvdRLhwga1tcURUwzNGKAGhY7KnjRS0AjFpvXoZF0TaA7wFb2Dxl9Abb0S2GUMQMZZczAWGsoYwCmt9nZ9hnc/oP4nQI2HAVsOJrHSubxK7hJbrPNoHWwMCYx+pDGOlgA8+jNzd4r5peyBiygHlPQo4Yxevp87f4NO3rvu4EBozUAAAAASUVORK5CYII=)',
+				'width':'20px',
+				'height':'20px'
+			});
+		}
+	}
+	function finalGrade() {
+		var t=json.grade,reg0,reg1,reg2;
+		if(t&&t.Function){
+			return Function(t.Function)();
+		}
+		if(!t||t==''||t=='mix'){t='mix60%3';} // default to mix
+		reg0 = /mix\d{2}%\d/; // mix
+		if(reg0.test(t)){
+			var points=0,total=0,i=0;
+			for(;i<g.length;i++){
+				if(g[i]){points+=problemFromId(exp[i]).weight||1;}
+			}
+			for(i=0;i<problems.length;i++){
+				total+=problems[i].weight||1;
+			}
+			var p=points/total>=Number('.'+t.substring(3,5));
+			var n=false;
+			if(g.length>=Number(t.substring(6))){
+				for(var i=Number(t)-1;i<g.length;i++){
+					var c=true;
+					for(var j=0;j<Number(t.substring(6));j++){
+						c = c&&[i-j];
+					}
+					if(c){n=true;}
+				}
+			}
+			return p||n;
+		}
+		reg1 = /\d{2}%/; // overall percentage
+		if(reg1.test(t)){
+			var points=0,total=0,i=0;
+			for(;i<g.length;i++){
+				if(g[i]){points+=problemFromId(exp[i]).weight||1;}
+			}
+			for(i=0;i<problems.length;i++){
+				total+=problems[i].weight||1;
+			}
+			return points/total >= Number('.'+t.substring(0,2));
+		}
+		reg2 = /\d+/; // consecutive repetitions
+		if(reg2.test(t)){
+			if(g.length<Number(t)){return false;}
+			for(var i=Number(t)-1,c,j;i<g.length;i++){
+				c=true;
+				for(j=0;j<Number(t);j++){
+					c = c&&[i-j];
+				}
+				if(c){return true;}
+			}
+			return false;
+		}
+	}
+	function feedbackMatch(){
+		var m=[],i=0,j,f,c;
+
+		// create m, a list of matched feedbacks
+		for(;i<json.feedback.length;i++){
+			f=json.feedback[i],c=true;
+			for(j=0;j<f[0].length;j++){
+				if(g.length<f[0].length){c=false;break}
+				if(g[g.length-1-j]==!f[0][f[0].length-1-j]) {c=false;break}
+			}
+			if(c){m[m.length]=f}
+		}
+		
+		// sort m to find the most complex match
+		m.sort(function(a,b){
+			if(a[0].length<b[0].length){return -1}
+			if(a[0].length>b[0].length){return 1}
+			return 0;
+		});
+		
+		// return most complex match
+		try{return m[m.length-1][1]}catch(e){return ''}
+	}
+	
+	x = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+	x.onload = function(){
+		json=JSON.parse(this.responseText);
+		problems=json.problems;
+		explain=!json.method||json.method=='norepeatrandom'||json.method=='order'||json.method=='bisection';
+	};
+	x.open("get", decodeURI(/\?js=(.+)/.exec(window.location.search)[1])+".json", true);
+	x.send();
+
+	window.exp = function(){return exp};
+	window.switchClick = function() {
+		var b=document.getElementById('btn');
+		if(switcher%2){
+			newProblem();
+			try{b.innerHTML='Submit'}catch(e){};
+			document.getElementById("viewsoln").style.display="none";
+		}
+		else {
+			submit();
+			try{b.innerHTML='Next Problem'}catch(e){};
+			if (explain&&problemFromId(exp[exp.length-1]).explanation) {
+				document.getElementById("viewsoln").onclick=function(){window.m=new Modal();m.open({content:problemFromId(exp[exp.length-1]).explanation});m.center();}
+				document.getElementById("viewsoln").style.display="inline-block";
+			};
+		}
+		switcher++;
+	};
+	window.JSInput = (function () {
+		var channel;
+		if (window.parent !== window) {
+		    channel = Channel.build({
+		        window: window.parent,
+		        origin: "*",
+		        scope: "JSInput"
+		    });
+		    channel.bind("getGrade", getGrade);
+		    channel.bind("getState", getState);
+		    channel.bind("setState", setState);
+		}
+		function getGrade () {return finalGrade();}
+		function getState () {return JSON.stringify({g:g,exp:exp});}
+		function setState () {/*todo*/}
+		return {
+			getState: getState,
+			setState: setState,
+			getGrade: getGrade
+		};
+	}());
+})();
+</script>
+<button id="btn" onclick="switchClick();">Start</button>
