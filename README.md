@@ -84,11 +84,9 @@ example that will make each new problem be the same as the last incorrect proble
 __json___:
 
 ```JSON  
-...
 "method": {
     "Function": "for(var i=0;i&lt;g.length;i++)if(!g[g.length-1-i])return problemFromId(exp[exp.length-1-i]);return problems[problems.length-1];"
 } 
-...
 ```
 	
 beautified __javascript__ used above:
