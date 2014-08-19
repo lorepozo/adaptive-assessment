@@ -17,19 +17,21 @@ This will load the problems.json file inside assess.html.
 
 This module was written with edX's JSInput XBlock in mind. To use this tool with edX, simply use the following XML snippet, changing `width`, `height`, and `problems` accordingly.
 
-	<script type="loncapa/python">
-	import json
-	def assess(e, a):
-	  return json.loads(a)["answer"]
-	</script>
-	<customreponse cfn="assess">
-    	<jsinput gradefn="JSInput.getGrade"
-    		get_statefn="JSInput.getState"
-    		set_statefn="JSInput.setState"
-    		width="600"
-    		height="320"
-    		html_file="/static/assess.html?js=problems" />
-	</customresponse>
+```XML
+<script type="loncapa/python">
+import json
+def assess(e, a):
+  return json.loads(a)["answer"]
+</script>
+<customreponse cfn="assess">
+	<jsinput gradefn="JSInput.getGrade"
+		get_statefn="JSInput.getState"
+		set_statefn="JSInput.setState"
+		width="600"
+		height="320"
+		html_file="/static/assess.html?js=problems" />
+</customresponse>
+```
 
 ### The JSON Format
 
@@ -105,7 +107,7 @@ __json___:
 
 ```JSON  
 "method": {
-    "Function": "for(var i=0;i&lt;g.length;i++)if(!g[g.length-1-i])return problemFromId(exp[exp.length-1-i]);return problems[problems.length-1];"
+    "Function": "for(var i=0;i<g.length;i++)if(!g[g.length-1-i])return problemFromId(exp[exp.length-1-i]);return problems[problems.length-1];"
 } 
 ```
 	
