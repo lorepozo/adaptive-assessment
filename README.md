@@ -5,11 +5,31 @@
 
 ### Getting Started
 
-Open the `.html` file in your web browser, and add onto the link such that it appears as 
+You can see an example implementation with the provided problems.json file [here](http://lucasmorales.co/resources/relate/assess.html?js=problems).
 
-> ...adaptive_assessment.html?js=problems
+To open the implementation yourself, download the reposity and use your web browser to navigate:
 
-so that it loads the problems.json file. 
+> ...assess.html?js=problems
+
+This will load the problems.json file inside assess.html. 
+
+### Using with edX
+
+This module was written with edX's JSInput XBlock in mind. To use this tool with edX, simply use the following XML snippet, changing `width`, `height`, and `problems` accordingly.
+
+	<script type="loncapa/python">
+	import json
+	def assess(e, a):
+	  return json.loads(a)["answer"]
+	</script>
+	<customreponse cfn="assess">
+    	<jsinput gradefn="JSInput.getGrade"
+    		get_statefn="JSInput.getState"
+    		set_statefn="JSInput.setState"
+    		width="600"
+    		height="320"
+    		html_file="/static/assess.html?js=problems" />
+	</customresponse>
 
 ### The JSON Format
 

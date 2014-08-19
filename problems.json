@@ -2,7 +2,9 @@
 	"feedback": [
 		[[1],"Correct!"],
 		[[0],"Incorrect"],
-		[[1,1,1],"Correct Streak!"],
+		[[0,1],"Comeback Time!"],
+		[[1,1],"Two in a row! <i>Nice!</i>"],
+		[[1,1,1],"Winning Streak!"],
 		[[0,0,0],"Oh no!! So bad!!"]
 	],
 	"method":"norepeatrandom",
