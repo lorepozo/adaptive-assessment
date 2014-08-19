@@ -77,9 +77,9 @@ special available values/functions:
 + `exp`: __Array__ Problem IDs in order experienced
 + `g`: __Array__ Booleans representing correctness in order experienced
 
-If the custom function is for a problem object's solution, an additional value of `inp` is provided, and is a __String__ representing the user's input. An example for a numerical solution would be `"solution":{"Function":"return Number(inp)==0"}`
+If the custom function is for a problem object's solution, an additional value of `inp` is provided, and is a __String__ representing the user's input. An example for a numerical text solution would be `"solution":{"Function":"return Number(inp)==0"}`
 
-example that will make each new problem be the same as the last incorrect problem or (if none are incorrect, the last problem defined in `problems`): 
+Below is an example that will make each new problem be the same as the last incorrect problem or (if none are incorrect, the last problem defined in `problems`): 
 
 __json___:
 
