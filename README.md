@@ -92,11 +92,15 @@ __json___:
 beautified __javascript__ used above:
 
 ```Javascript
+// iterate over assessed problems
 for (var i = 0; i < g.length; i++) {
 	// note that exp.length == g.length
+	// check if incorrect in reverse order
 	if ( !g[g.length-1 - i] ) {
+		// return incorrectly answered problem
 		return problemFromId( exp[exp.length-1 - i] );
 	}
 }
+// if nothing comes from the code above, return that last defined problem
 return problems[problems.length-1];
 ```
