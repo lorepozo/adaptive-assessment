@@ -29,7 +29,7 @@ def assess(e, a):
 		set_statefn="JSInput.setState"
 		width="600"
 		height="320"
-		html_file="/static/assess.html?js=problems" />
+		html_file="/static/assess.html?js=ProblemName" />
 </customresponse>
 ```
 
